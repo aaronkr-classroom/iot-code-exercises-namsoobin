@@ -7,10 +7,10 @@
  - 두번째 센서의 측정 단위는 룩스('lux')입니다.
  - 다음과 같은 형식으로 표현합니다. sensor = {'dht11': {중략},중략}
 
-sensor = {
-          'dht11' : {'temperature':23, 'humidity':47, 'unit':'cilsius'},
-          'dh1750' : {'조도값':450, '측정단위':'lux'}
-          }
+sensor = {<br>
+          'dht11' : {'temperature':23, 'humidity':47, 'unit':'cilsius'},<br>
+          'dh1750' : {'조도값':450, '측정단위':'lux'}<br>
+          }<br>
 
 2. 다음 내용을 하나의 조건식으로 만드세요.
 - 홀수 달의 15일 16일이면 "그날"을 출력함.
@@ -18,31 +18,31 @@ sensor = {
 - 그 외는 "평일"을 출력함.
 - 변수는 month와 day를 사용함.
 
-month = int(input())
-day = int(input())
-if (month % 2 == 1 and day == 15) or (month % 2 == 0 and day == 16):
-    print("그 날")
-elif month == 8 and day== 15 :
-    print("광복절")
-else:
-    print("평일")
+month = int(input())<br>
+day = int(input())<br>
+if (month % 2 == 1 and day == 15) or (month % 2 == 0 and day == 16):<br>
+    print("그 날")<br>
+elif month == 8 and day== 15 :<br>
+    print("광복절")<br>
+else:<br>
+    print("평일")<br>
 
 3. for문을 이용해 1~50의 짝수 합을 구하되, 3의 배수는 제외하세요.
 
-for i in range(1, 50):
-    if (i%2==0) and (not i%6==0):
-        print(i)
+for i in range(1, 50):<br>
+    if (i%2==0) and (not i%6==0):<br>
+        print(i)<br>
 
 4. 연습문제 4.3을 while 문으로 해결하세요.
 
-i=0
-a=[]
+i=0<br>
+a=[]<br>
 
-while i<50:
-    i += 1
-    if (i%2==0) and (not i%6==0):
-        print(i)
-        a.append(i)
+while i<50:<br>
+    i += 1<br>
+    if (i%2==0) and (not i%6==0):<br>
+        print(i)<br>
+        a.append(i)<br>
         
-print(sum(a))
+print(sum(a))<br>
 
