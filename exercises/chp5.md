@@ -1,57 +1,76 @@
 # chp5.
 3. 다음 조건으로 클래스와 그 클래스를 사용하는 프로그램을 만드시오.
-   class SayDays:
+class SayDays:
     def __init__(self, year, month, day):
+        #속성 초기화
         self.year = year
         self.month = month
         self.day = day
-        self.is_leap = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
-        self.month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-        if self.is_leap:
-            self.month_days[1] = 29
-
-    def days(self):
-        total_days = sum(self.month_days[:self.month - 1]) + self.day
-        return total_days
-
-    def days_left(self):
-        year_total = 366 if self.is_leap else 365
-        return year_total - self.days()
-
-    def weekday(self):
-        y = self.year
-        m = self.month
-        d = self.day
         
-        if m < 3:
+    def is_leap(self):
+        #유년 여부 확인
+        y = self.year
+        return((y%4 == 0 and y%100 != 0) or
+           (y%400 == 0)) #운년 = True, 평년 = False
+        
+    def.days(): #년에 몇째 날 인지 (1월 1일부터 기준)
+        #1월 1일부터 지난 날짜 계산
+        days_in_month: [
+            31, 29 if self.is_leap() else 28, 30, 31, #2월 28?29?
+            31, 30, 31, 31,
+            30, 31, 30, 31
+            ]
+        total = 0
+        m = 0
+        while m < self.month - 1:
+            total += days_in_month[m]
+            m+= 1
+        
+        total += self.day #13
+        return total
+    
+    def.days_left(self):# 년에 남은 일수 (12월 31일 기준)
+        #12월 31일까지 남은 날짜
+        #366? 365?
+        total_days=366 if self.is_leap() else 365
+        return total_days - self.days()
+        
+    def.weekday(): # 숫자로 요일을 알려줌.
+        #Zeller 공식으로 요일 계산...어려워서...나중에
+        y=self.year
+        m=self.month
+        d=self.day
+        
+        if m > 3:
             m += 12
             y -= 1
             
-        k = y % 100
-        j = y // 100
+        K = y%100
+        J = y//100 #정수 필수
         
-        # h = (q + [13(m+1)/5] + K + [K/4] + [J/4] - 2J) mod 7
-        h = (d + ((13 * (m + 1)) // 5) + k + (k // 4) + (j // 4) - (2 * j)) % 7
+        h = (d + (13 * (m + 1)) //
+             5 + K + K // 4 + J // 4 + 5 *j)%7
         return h
-
-    def weekday_name(self):
-        names = ["토요일", "일요일", "월요일", "화요일", "수요일", "목요일", "금요일"]
+        
+    def.weekday_name(self): # 0 -> 토요일 매핑
+        #요일 이름 반환
+        names = [
+            "토요일","일요일","월요일","화요일",
+            "수요일","목요일","금요일"
+            ]
         return names[self.weekday()]
-
+    
+#클래스 사용하는 프로그램
 while True:
-    try:
-        user_input = input()
-        if user_input.lower() == 'q':
-            break
-            
-        y, m, d = map(int, user_input.split())
-        sd = SayDays(y, m, d)
-        
-        print(f"1. 1월 1일 기준: {sd.days()}일째")
-        print(f"2. 12월 31일 기준 남은 일수: {sd.days_left()}일")
-        print(f"3. 요일 숫자 (0:토): {sd.weekday()}")
-        print(f"4. 요일 이름: {sd.weekday_name()}")
-        print("-" * 30)
-        
-    except ValueError:
-        print("잘못된 입력방식")
+    #날짜 입력
+    year = int(input("년 입력"))
+    month = int(input("월 입력"))
+    day = int(input("일 입력"))
+    
+    date = SayDays(year, month, day)
+    
+    #결과 출력
+    print("몇 번째 날: ",date.days())
+    print("남은 일수: ",date.days_left())
+    print("요일 숫자: ",date.weekday())
+    print("몇 번째 날: ",date.weekday_name())
