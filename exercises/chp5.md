@@ -4,7 +4,7 @@
     def __init__(self, year, month, day):
         self.year = year
         self.month = month
-        self.day = daㅛ
+        self.day = day
         self.is_leap = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
         self.month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
         if self.is_leap:
@@ -40,7 +40,7 @@
 
 while True:
     try:
-        user_input = input("날짜를 입력해줘 (예: 2024 10 25, 종료하려면 'q' 입력): ")
+        user_input = input()
         if user_input.lower() == 'q':
             break
             
